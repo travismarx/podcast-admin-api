@@ -1,0 +1,10 @@
+dist
+.env
+node_modules
+.DS_Store
+.htaccess
+.htpasswd
+xml
+xml_tests
+release
+*.ini
