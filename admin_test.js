@@ -164,11 +164,11 @@ api_app.post('/streamserver', (req, res) => {
   // console.log(req.body.From);
   if (isStart) {
     // console.log('Is a start command');
-    request.get('https://api.linode.com/?api_key=KKzuBoyUjvmOhIsfqA3HDfBrqsU8SUpU1f87uYd2cw3XdREOjiMjfmcb3z898mhA&LinodeID=2673153&api_action=linode.boot', (err, res) => {
+    request.get(`https://api.linode.com/?api_key=${process.env.LINODE_KEY}&api_action=linode.boot`, (err, res) => {
       // console.log(res.body, 'boot request res');
 
       let resTimer = setInterval(() => {
-        request.get('https://api.linode.com/?api_key=KKzuBoyUjvmOhIsfqA3HDfBrqsU8SUpU1f87uYd2cw3XdREOjiMjfmcb3z898mhA&LinodeID=2673153&api_action=linode.job.list', (err, res) => {
+        request.get(`https://api.linode.com/?api_key=${process.env.LINODE_KEY}&api_action=linode.job.list`, (err, res) => {
           // console.log(JSON.parse(res.body).DATA, 'job list res');
           if (JSON.parse(res.body).DATA && JSON.parse(res.body).DATA[0].HOST_SUCCESS === 1) {
             twilio.messages.create({
@@ -208,7 +208,7 @@ ui_app.get("/*", (req, res) => {
   res.sendFile(`${__dirname}/dist/index.html`);
 });
 
-ui_app.listen(5353, () => {});
+ui_app.listen(5353, () => { });
 
 function jsonToXML(xmlInfo) {
   let language = "EN";
@@ -230,13 +230,13 @@ function jsonToXML(xmlInfo) {
   ].textContent}</itunes:explicit>\n            <itunes:image href="${xmlInfo[
     "itunes:image"
   ].attributes.href}" />\n            <itunes:owner>\n                <itunes:name>${xmlInfo[
-    "itunes:owner"
+  "itunes:owner"
   ]["itunes:name"]}</itunes:name>\n                <itunes:email>${xmlInfo[
-    "itunes:owner"
+  "itunes:owner"
   ][
-    "itunes:email"
+  "itunes:email"
   ]}</itunes:email>                \n            </itunes:owner>\n            <itunes:block>${xmlInfo[
-    "itunes:block"
+  "itunes:block"
   ]}</itunes:block>\n            <itunes:category text="${xmlInfo[
     "itunes:category"
   ].attributes.text}">\n                <itunes:category text="${xmlInfo[

@@ -13,7 +13,7 @@ const resizeUrl = "https://api.linode.com/v4/linode/instances/2673153/resize";
 const bootUrl = "https://api.linode.com/v4/linode/instances/2673153/boot";
 const linodeStatusUrl = "https://api.linode.com/v4/linode/instances/2673153";
 const authHeader = {
-  Authorization: "Bearer 7debe84265e16a5eb10ec0483935b9b50349a49e382492dbe02f5266665d947e",
+  Authorization: `Bearer ${process.env.LINODE_TOKEN}`,
 };
 
 const infoOptions = {

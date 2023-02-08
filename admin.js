@@ -198,13 +198,13 @@ api_app.post("/streamserver", (req, res) => {
   if (isStart) {
     // console.log('Is a start command');
     request.get(
-      "https://api.linode.com/?api_key=KKzuBoyUjvmOhIsfqA3HDfBrqsU8SUpU1f87uYd2cw3XdREOjiMjfmcb3z898mhA&LinodeID=2673153&api_action=linode.boot",
+      `https://api.linode.com/?api_key=${process.env.LINODE_KEY}&api_action=linode.boot`,
       (err, res) => {
         // console.log(res.body, 'boot request res');
 
         let resTimer = setInterval(() => {
           request.get(
-            "https://api.linode.com/?api_key=KKzuBoyUjvmOhIsfqA3HDfBrqsU8SUpU1f87uYd2cw3XdREOjiMjfmcb3z898mhA&LinodeID=2673153&api_action=linode.job.list",
+            `https://api.linode.com/?api_key=${process.env.LINODE_KEY}&api_action=linode.job.list`,
             (err, res) => {
               // console.log(JSON.parse(res.body).DATA, 'job list res');
               if (JSON.parse(res.body).DATA && JSON.parse(res.body).DATA[0].HOST_SUCCESS === 1) {
@@ -248,7 +248,7 @@ ui_app.get("/*", (req, res) => {
   res.sendFile(`${__dirname}/dist/index.html`);
 });
 
-ui_app.listen(4343, () => {});
+ui_app.listen(4343, () => { });
 
 // ui_app2.use(
 //   compression({
